@@ -14,10 +14,10 @@ import com.example.repaitshopapplication.databinding.DialogCreateProductBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
-class MainActivity : AppCompatActivity(),View.OnClickListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var dialog : AlertDialog
+    private lateinit var dialog: AlertDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -41,15 +41,17 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
     }
 
     private fun setupNavController() {
-        val navController: NavController = Navigation.findNavController(this,
+        val navController: NavController = Navigation.findNavController(
+            this,
             R.id.navHostFragmentContainer
         )
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.activity_main_bottom_navigation_view)
+        val bottomNavigationView =
+            findViewById<BottomNavigationView>(R.id.activity_main_bottom_navigation_view)
         setupWithNavController(bottomNavigationView, navController)
     }
 
     override fun onClick(v: View?) {
-        when(v!!.id){
+        when (v!!.id) {
             R.id.fab -> createProductDialog()
             R.id.saveBtn -> saveProduct()
         }
