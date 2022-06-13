@@ -3,4 +3,9 @@
     <string name="title_home">Home</string>
     <string name="title_products">Products</string>
     <string name="title_search">search</string>
+    <string name="number">number</string>
+    <string name="name">name</string>
+    <string name="save">save</string>
+    <string name="photo">photo</string>
+    <string name="date">date</string>
 </resources>
