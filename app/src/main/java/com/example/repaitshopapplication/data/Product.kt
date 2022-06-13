@@ -10,7 +10,7 @@ data class Product(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val name: String,
-    val number: Long,
+    val number: String,
     val date: ProductDate,
     val time: ProductTime,
     val status: String

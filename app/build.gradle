@@ -59,9 +59,15 @@ dependencies {
 
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:2.4.2"
+    kapt "androidx.room:room-compiler:2.4.2"
+
 
     //coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1-native-mt'
+
+
+    //Gson
+    implementation 'com.google.code.gson:gson:2.8.9'
 
     //Dependency injection
     def koin_version = "3.1.2"

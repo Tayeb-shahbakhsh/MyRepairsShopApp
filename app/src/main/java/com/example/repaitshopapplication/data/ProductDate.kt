@@ -6,7 +6,7 @@ import saman.zamani.persiandate.PersianDate
 
 @Parcelize
 data class ProductDate(
-    val year : Int,
+    val year : Int?,
     val month : Int,
     val day : Int,
 ) : Parcelable{

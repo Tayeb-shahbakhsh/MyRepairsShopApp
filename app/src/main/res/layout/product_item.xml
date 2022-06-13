@@ -27,7 +27,7 @@
             android:id="@+id/numberTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{Long.toString(product.number)}"
+            android:text="@{product.number}"
             android:textAlignment="textEnd"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/nameTV" />
