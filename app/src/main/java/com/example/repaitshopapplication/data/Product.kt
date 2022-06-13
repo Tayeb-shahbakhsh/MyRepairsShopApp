@@ -1,4 +1,13 @@
 package com.example.repaitshopapplication.data
 
-import java.sql.Date
-data class Product(val name:String,val number:Int,val date:)
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class Product(
+    val name: String,
+    val number: Int,
+    val date: ProductDate,
+    val time: ProductTime,
+    val status: String
+) : Parcelable

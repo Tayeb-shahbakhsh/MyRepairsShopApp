@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -29,8 +32,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures {
-        viewBinding true
+
+    buildFeatures{
+        dataBinding true
     }
 }
 
@@ -50,5 +54,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     //persian date
-    implementation 'com.github.samanzamani:PersianDate:1.5.0'
+    implementation 'com.github.samanzamani:PersianDate:1.4.0'
+    implementation 'com.github.aliab:persian-date-picker-dialog:1.8.0'
+
 }
+
