@@ -1,13 +1,14 @@
 package com.example.repaitshopapplication.database
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
 import com.example.repaitshopapplication.data.Product
+import com.example.repaitshopapplication.database.typeconvertor.ProductDataConvertor
+import com.example.repaitshopapplication.database.typeconvertor.ProductTimeConvertor
 
 
 @Database(version = 1, exportSchema = false, entities = [Product::class])
+@TypeConverters(ProductDataConvertor::class,ProductTimeConvertor::class)
 abstract class AppDatabase : RoomDatabase() {
     companion object {
         @JvmStatic
@@ -17,7 +18,7 @@ abstract class AppDatabase : RoomDatabase() {
         fun getAppDatabase(context: Context): AppDatabase {
             if (database == null)
                 database = Room.databaseBuilder(context, AppDatabase::class.java, "products.db")
-                    .allowMainThreadQueries().build()
+                    .build()
             return database as AppDatabase
         }
     }
