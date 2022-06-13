@@ -49,7 +49,7 @@ class ProductsFragment : Fragment() {
 
 val fakeData = listOf<Product>(
     Product( name = "طیب شه بخش", number = 9171585512, date = ProductDate(PersianDate().shYear,PersianDate().shMonth,PersianDate().shDay),
-        time = ProductTime(12.toString(),12.toString()),"اماده"
+        time = ProductTime(12.toString(),12.toString()), status = "اماده"
     ),
     Product( name = "طیب شه بخش", number = 9171585512, date = ProductDate(PersianDate().shYear,PersianDate().shMonth,PersianDate().shDay),
         time = ProductTime(12.toString(),12.toString()), status = "اماده"

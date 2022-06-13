@@ -57,5 +57,14 @@ dependencies {
     implementation 'com.github.samanzamani:PersianDate:1.4.0'
     implementation 'com.github.aliab:persian-date-picker-dialog:1.8.0'
 
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:2.4.2"
+
+    //coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1-native-mt'
+
+    //Dependency injection
+    def koin_version = "3.1.2"
+    implementation "io.insert-koin:koin-android:$koin_version"
 }
 
