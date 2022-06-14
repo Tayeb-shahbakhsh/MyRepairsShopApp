@@ -44,7 +44,7 @@ class ProductsFragment : Fragment() {
         val rv = binding.productsRV
         rv.layoutManager = LinearLayoutManager(requireContext())
 
-        viewModel.productsLiveData.observe(viewLifecycleOwner){
+        viewModel.productsLiveData.observe(viewLifecycleOwner) {
             rv.adapter = ProductsAdapter(it)
         }
     }
