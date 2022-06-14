@@ -2,8 +2,6 @@ package com.example.repaitshopapplication.ui
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -64,6 +62,9 @@ class MainActivity : AppCompatActivity(),  KoinComponent {
 
         view.dateBtn.setOnClickListener {
             getDateFromDateDialog()
+        }
+        view.photoBtn.setOnClickListener {
+            viewModel.capturePhoto(this)
         }
         view.saveBtn.setOnClickListener {
             saveProduct(dialog, view)
