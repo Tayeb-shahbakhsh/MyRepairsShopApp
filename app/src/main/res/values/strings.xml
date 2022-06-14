@@ -8,4 +8,10 @@
     <string name="save">save</string>
     <string name="photo">photo</string>
     <string name="date">date</string>
+    <string name="galleyTxt">gallery</string>
+    <string name="cameraTxt">camera</string>
+    <string name="nameholder">name :</string>
+    <string name="numberholder">number :</string>
+    <string name="problems">problems</string>
+    <string name="ready">ready</string>
 </resources>

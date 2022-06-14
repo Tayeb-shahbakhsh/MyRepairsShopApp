@@ -7,11 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.repaitshopapplication.data.Product
 import com.example.repaitshopapplication.data.ProductDate
 import com.example.repaitshopapplication.repository.ProductsRepository
-import com.example.repaitshopapplication.service.PhotoCapture
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import saman.zamani.persiandate.PersianDate
 import java.nio.file.Path
 
 class MainActivityViewModel(private val productsRepository: ProductsRepository) : ViewModel() {
@@ -20,8 +19,8 @@ class MainActivityViewModel(private val productsRepository: ProductsRepository) 
     val productsLiveData: LiveData<List<Product>>
         get() = _productsLiveData
 
-    val newProductDateLiveData = MutableLiveData<ProductDate>()
-    val photoPathLiveData = MutableLiveData<Path>()
+    val newProductDateLiveData = MutableLiveData<ProductDate>(ProductDate(PersianDate().shYear,PersianDate().shMonth,PersianDate().shDay))
+    val photoPathLiveData = MutableLiveData<String>("")
 
     fun addProducts(product: Product) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -36,10 +35,5 @@ class MainActivityViewModel(private val productsRepository: ProductsRepository) 
             }
         }
     }
-
-    fun capturePhoto(mainActivity: MainActivity) {
-        val photoPath = PhotoCapture().createImageFile(mainActivity)
-    }
-
 
 }

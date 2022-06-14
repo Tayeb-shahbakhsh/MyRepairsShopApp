@@ -2,9 +2,12 @@ package com.example.repaitshopapplication.ui
 
 import android.graphics.Color
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -15,8 +18,11 @@ import com.example.repaitshopapplication.data.ProductDate
 import com.example.repaitshopapplication.data.ProductTime
 import com.example.repaitshopapplication.databinding.ActivityMainBinding
 import com.example.repaitshopapplication.databinding.DialogCreateProductBinding
+import com.example.repaitshopapplication.utils.Issues
 import com.example.repaitshopapplication.utils.Status
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.vansuita.pickimage.bundle.PickSetup
+import com.vansuita.pickimage.dialog.PickImageDialog
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog
 import ir.hamsaa.persiandatepicker.api.PersianPickerDate
 import ir.hamsaa.persiandatepicker.api.PersianPickerListener
@@ -60,15 +66,43 @@ class MainActivity : AppCompatActivity(),  KoinComponent {
             .setCancelable(false)
             .show()
 
+        view.problemAc.setAdapter( ArrayAdapter(this,R.layout.problem_item_list,Issues.ISSUES))
+        view.problemCountNumberPicker.minValue = 1
+        view.problemCountNumberPicker.maxValue = 50
+        viewModel.photoPathLiveData.observe(this){
+            if (it.isNotEmpty()){
+                view.productIv.setImageURI(it.toUri())
+            }
+        }
+
         view.dateBtn.setOnClickListener {
             getDateFromDateDialog()
         }
-        view.photoBtn.setOnClickListener {
-            viewModel.capturePhoto(this)
+        view.productIv.setOnClickListener {
+            showSelectPhotoDialog()
         }
         view.saveBtn.setOnClickListener {
             saveProduct(dialog, view)
         }
+    }
+
+    private fun setupPhotoDialog(): PickSetup {
+        return PickSetup().apply {
+            buttonOrientation = LinearLayout.HORIZONTAL
+            isSystemDialog = false
+            galleryButtonText = getString(R.string.galleyTxt)
+            cameraButtonText = getString(R.string.cameraTxt)
+            width = 500
+            height = 500
+        }
+    }
+
+    private fun showSelectPhotoDialog() {
+            PickImageDialog.build(setupPhotoDialog()) {
+                if (it.error == null) {
+                    viewModel.photoPathLiveData.postValue(it.path)
+                }
+            }.show(this)
     }
 
     private fun getDateFromDateDialog(){
