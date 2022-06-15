@@ -1,10 +1,10 @@
 package com.example.repaitshopapplication.repository
 
 import com.example.repaitshopapplication.data.Product
-import com.example.repaitshopapplication.database.ProductsDao
+import com.example.repaitshopapplication.database.ProductDao
 import kotlinx.coroutines.flow.Flow
 
-class ProductsRepositoryImpl(private val productsDao: ProductsDao) : ProductsRepository {
+class ProductsRepositoryImpl(private val productsDao: ProductDao) : ProductsRepository {
 
     override fun add(product: Product): Long = productsDao.add(product)
 

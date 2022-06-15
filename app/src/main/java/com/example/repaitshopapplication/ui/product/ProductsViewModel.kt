@@ -11,7 +11,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class ProductsViewModel(private val productsRepository: ProductsRepository) : ViewModel() {
+class ProductsViewModel(
+    private val productsRepository: ProductsRepository
+    ) : ViewModel() {
 
     private var _productsLiveData = MutableLiveData<List<Product>>()
     val productsLiveData: LiveData<List<Product>>
