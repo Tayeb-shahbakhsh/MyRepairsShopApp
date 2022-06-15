@@ -1,13 +1,12 @@
 package com.example.repaitshopapplication
 
 import android.app.Application
-import androidx.room.Database
 import com.example.repaitshopapplication.database.AppDataBase
 import com.example.repaitshopapplication.repository.ProductsRepository
 import com.example.repaitshopapplication.repository.ProductsRepositoryImpl
 import com.example.repaitshopapplication.ui.MainActivityViewModel
-import com.example.repaitshopapplication.ui.product.ProductsViewModel
-import org.koin.android.ext.android.get
+import com.example.repaitshopapplication.ui.product.ProductViewModel
+import com.example.repaitshopapplication.ui.products.ProductsViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.component.KoinComponent
@@ -23,6 +22,7 @@ class App : Application(), KoinComponent {
         val modules = module {
             viewModel { ProductsViewModel(get()) }
             viewModel { MainActivityViewModel(get()) }
+            viewModel { ProductViewModel(get()) }
             factory<ProductsRepository> { ProductsRepositoryImpl(database.productDao) }
         }
 

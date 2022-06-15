@@ -163,15 +163,15 @@ class MainActivity : AppCompatActivity(), KoinComponent {
         val num = view.numberET.text.toString()
         val date = viewModel.newProductDateLiveData.value!!
         val time = getTime()
+        val photoPath = viewModel.newPhotoPathLiveData.value
         val problems = viewModel.newProblemsLiveData.value!!.toList()
-        val status = Status.NOTREADY
         return Product(
             name = name,
             number = num,
             date = date,
             time = time,
+            imagePath = photoPath!!,
             problems = problems,
-            status = status
         )
     }
 

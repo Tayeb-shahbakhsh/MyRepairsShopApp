@@ -1,17 +1,20 @@
 <resources>
     <string name="app_name">RepaitShopApplication</string>
-    <string name="title_home">Home</string>
-    <string name="title_products">Products</string>
-    <string name="title_search">search</string>
-    <string name="number">number</string>
-    <string name="name">name</string>
-    <string name="save">save</string>
-    <string name="photo">photo</string>
-    <string name="date">date</string>
-    <string name="galleyTxt">gallery</string>
-    <string name="cameraTxt">camera</string>
-    <string name="nameholder">name :</string>
-    <string name="numberholder">number :</string>
-    <string name="problems">problems</string>
-    <string name="ready">ready</string>
+    <string name="title_home">خانه</string>
+    <string name="title_products">وسایل ها</string>
+    <string name="title_search">جست و جو</string>
+    <string name="number">شماره</string>
+    <string name="name">نام</string>
+    <string name="save">ثبت</string>
+    <string name="photo">عکس</string>
+    <string name="date">تاریخ</string>
+    <string name="galleyTxt">گالری</string>
+    <string name="cameraTxt">دوربین</string>
+    <string name="nameholder">نام :</string>
+    <string name="numberholder">شماره :</string>
+    <string name="problems">مشکل ها</string>
+    <string name="ready">آماده</string>
+    <string name="delete">حذف</string>
+    <string name="add_problem">اضافه کردن مشکل</string>
+    <string name="back">برگشت</string>
 </resources>

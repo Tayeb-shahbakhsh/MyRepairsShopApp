@@ -5,14 +5,16 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(tableName = "products")
 data class Product(
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
-    val name: String,
-    val number: String,
-    val date: ProductDate,
-    val time: ProductTime,
-    val problems: List<String>,
-    val status: String
-)
+    var id: Int = 0,
+    var name: String = "",
+    var number: String = "",
+    var date: ProductDate = ProductDate(0,0,0),
+    var imagePath: String = "",
+    var time: ProductTime=  ProductTime("0","0"),
+    var problems: List<String> = listOf(""),
+    var status: String = ""
+) : Parcelable

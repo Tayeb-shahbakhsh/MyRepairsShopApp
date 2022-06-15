@@ -37,12 +37,4 @@ class MainActivityViewModel(
         }
     }
 
-    fun getProducts() {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            productsRepository.getAll().collectLatest { products ->
-//                _productsLiveData.postValue(products)
-//            }
-//        }
-    }
-
 }

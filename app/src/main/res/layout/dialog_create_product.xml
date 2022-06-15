@@ -41,11 +41,9 @@
             android:layout_marginTop="12dp"
             android:maxHeight="300dp"
             android:src="@drawable/ic_baseline_add_photo_alternate_24"
-            app:layout_constraintBottom_toTopOf="@+id/dateBtn"
             app:layout_constraintEnd_toEndOf="@+id/numberET"
             app:layout_constraintStart_toStartOf="@+id/numberET"
-            app:layout_constraintTop_toBottomOf="@+id/numberET"
-            app:layout_constraintVertical_bias="0.021" />
+            app:layout_constraintTop_toBottomOf="@+id/numberET" />
 
         <NumberPicker
             android:id="@+id/problemCountNumberPicker"
@@ -63,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:hint="@string/problems"
-            app:layout_constraintBottom_toTopOf="@+id/problemBtn"
+            app:layout_constraintBottom_toTopOf="@+id/dateBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/productIv" />
 
@@ -71,7 +69,7 @@
             android:id="@+id/problemBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="add problem"
+            android:text="@string/add_problem"
             app:layout_constraintTop_toBottomOf="@id/dateBtn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
