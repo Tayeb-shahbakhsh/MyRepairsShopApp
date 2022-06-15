@@ -4,7 +4,6 @@ import android.graphics.Color
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
@@ -21,6 +20,7 @@ import com.example.repaitshopapplication.databinding.DialogCreateProductBinding
 import com.example.repaitshopapplication.utils.Issues
 import com.example.repaitshopapplication.utils.Status
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.textview.MaterialTextView
 import com.vansuita.pickimage.bundle.PickSetup
 import com.vansuita.pickimage.dialog.PickImageDialog
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog
@@ -31,19 +31,20 @@ import org.koin.core.component.KoinComponent
 import saman.zamani.persiandate.PersianDate
 
 
-class MainActivity : AppCompatActivity(),  KoinComponent {
+class MainActivity : AppCompatActivity(), KoinComponent {
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainActivityViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.activityMainBottomNavigationView.background = null
         setupNavController()
-        setUpClickListeners()
+        setUpFabClickListeners()
     }
 
-    private fun setUpClickListeners() {
+    private fun setUpFabClickListeners() {
         binding.fab.setOnClickListener {
             createProductDialog()
         }
@@ -66,15 +67,26 @@ class MainActivity : AppCompatActivity(),  KoinComponent {
             .setCancelable(false)
             .show()
 
-        view.problemAc.setAdapter( ArrayAdapter(this,R.layout.problem_item_list,Issues.ISSUES))
+        view.problemAc.setAdapter(ArrayAdapter(this, R.layout.problem_item_list, Issues.ISSUES))
         view.problemCountNumberPicker.minValue = 1
         view.problemCountNumberPicker.maxValue = 50
-        viewModel.photoPathLiveData.observe(this){
-            if (it.isNotEmpty()){
+        viewModel.newPhotoPathLiveData.observe(this) {
+            if (it.isNotEmpty()) {
                 view.productIv.setImageURI(it.toUri())
             }
         }
 
+        setupDialogClickListeners(view, dialog)
+    }
+
+    private fun setupDialogClickListeners(view: DialogCreateProductBinding, dialog: AlertDialog) {
+        view.problemBtn.setOnClickListener {
+            var problemBadgeView = MaterialTextView(this)
+            problemBadgeView.setBackgroundColor(resources.getColor(R.color.warning, null))
+            problemBadgeView.text = makeProblemText(view)
+            view.problemsContainerGridLayout.addView(problemBadgeView)
+            viewModel.newProblemsLiveData.value?.add(makeProblemText(view))
+        }
         view.dateBtn.setOnClickListener {
             getDateFromDateDialog()
         }
@@ -82,9 +94,13 @@ class MainActivity : AppCompatActivity(),  KoinComponent {
             showSelectPhotoDialog()
         }
         view.saveBtn.setOnClickListener {
-            saveProduct(dialog, view)
+            saveProduct(view)
+            dialog.dismiss()
         }
     }
+
+    fun makeProblemText(view: DialogCreateProductBinding): String =
+        "  ${view.problemCountNumberPicker.value} * ${view.problemAc.text}  "
 
     private fun setupPhotoDialog(): PickSetup {
         return PickSetup().apply {
@@ -98,14 +114,14 @@ class MainActivity : AppCompatActivity(),  KoinComponent {
     }
 
     private fun showSelectPhotoDialog() {
-            PickImageDialog.build(setupPhotoDialog()) {
-                if (it.error == null) {
-                    viewModel.photoPathLiveData.postValue(it.path)
-                }
-            }.show(this)
+        PickImageDialog.build(setupPhotoDialog()) {
+            if (it.error == null) {
+                viewModel.newPhotoPathLiveData.postValue(it.path)
+            }
+        }.show(this)
     }
 
-    private fun getDateFromDateDialog(){
+    private fun getDateFromDateDialog() {
         val dateDialog = PersianDatePickerDialog(this)
             .setPositiveButtonString("ثبت")
             .setTodayButton("امروز")
@@ -119,38 +135,44 @@ class MainActivity : AppCompatActivity(),  KoinComponent {
             .setShowInBottomSheet(true)
             .setListener(object : PersianPickerListener {
                 override fun onDateSelected(persianPickerDate: PersianPickerDate) {
-                        viewModel.newProductDateLiveData.postValue(
-                            ProductDate(
-                                persianPickerDate.persianYear,
-                                persianPickerDate.persianMonth,
-                                persianPickerDate.persianDay
-                            )
+                    viewModel.newProductDateLiveData.postValue(
+                        ProductDate(
+                            persianPickerDate.persianYear,
+                            persianPickerDate.persianMonth,
+                            persianPickerDate.persianDay
                         )
+                    )
                 }
+
                 override fun onDismissed() {
-                    Toast.makeText(this@MainActivity, "تاریخی انتخاب نکردید", Toast.LENGTH_LONG)
-                        .show()
+
                 }
             })
         dateDialog.show()
     }
 
-    private fun saveProduct(dialog: AlertDialog, view: DialogCreateProductBinding) {
-        val newProduct = getNewProductFromDialog(view, dialog)
+    private fun saveProduct(view: DialogCreateProductBinding) {
+        val newProduct = getNewProductFromDialog(view)
         viewModel.addProducts(newProduct)
     }
 
     private fun getNewProductFromDialog(
         view: DialogCreateProductBinding,
-        dialog: AlertDialog
     ): Product {
-        dialog.hide()
         val name = view.nameET.text.toString()
         val num = view.numberET.text.toString()
         val date = viewModel.newProductDateLiveData.value!!
         val time = getTime()
+        val problems = viewModel.newProblemsLiveData.value!!.toList()
         val status = Status.NOTREADY
-        return Product(name = name, number = num, date = date, time = time, status = status)
+        return Product(
+            name = name,
+            number = num,
+            date = date,
+            time = time,
+            problems = problems,
+            status = status
+        )
     }
 
     private fun getTime(): ProductTime {
@@ -159,4 +181,5 @@ class MainActivity : AppCompatActivity(),  KoinComponent {
             persianDate.hour.toString(), persianDate.minute.toString()
         )
     }
+
 }

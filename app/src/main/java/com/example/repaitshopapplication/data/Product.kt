@@ -13,5 +13,6 @@ data class Product(
     val number: String,
     val date: ProductDate,
     val time: ProductTime,
+    val problems: List<String>,
     val status: String
 )

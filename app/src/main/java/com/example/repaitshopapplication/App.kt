@@ -2,7 +2,7 @@ package com.example.repaitshopapplication
 
 import android.app.Application
 import androidx.room.Database
-import com.example.repaitshopapplication.database.AppDatabase
+import com.example.repaitshopapplication.database.AppDataBase
 import com.example.repaitshopapplication.repository.ProductsRepository
 import com.example.repaitshopapplication.repository.ProductsRepositoryImpl
 import com.example.repaitshopapplication.ui.MainActivityViewModel
@@ -19,11 +19,11 @@ class App : Application(), KoinComponent {
 
     override fun onCreate() {
         super.onCreate()
-        val database: AppDatabase = AppDatabase.getAppDatabase(this)
+        val database: AppDataBase = AppDataBase.getAppDatabase(this)
         val modules = module {
             viewModel { ProductsViewModel(get()) }
             viewModel { MainActivityViewModel(get()) }
-            factory<ProductsRepository> { ProductsRepositoryImpl(database.productsDao) }
+            factory<ProductsRepository> { ProductsRepositoryImpl(database.productDao) }
         }
 
         startKoin {

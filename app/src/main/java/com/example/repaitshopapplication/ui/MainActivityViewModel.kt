@@ -13,14 +13,23 @@ import kotlinx.coroutines.launch
 import saman.zamani.persiandate.PersianDate
 import java.nio.file.Path
 
-class MainActivityViewModel(private val productsRepository: ProductsRepository) : ViewModel() {
+class MainActivityViewModel(
+    private val productsRepository: ProductsRepository
+) : ViewModel() {
 
     private var _productsLiveData = MutableLiveData<List<Product>>()
     val productsLiveData: LiveData<List<Product>>
         get() = _productsLiveData
+    val newProductDateLiveData = MutableLiveData(
+        ProductDate(
+            PersianDate().shYear,
+            PersianDate().shMonth,
+            PersianDate().shDay
+        )
+    )
+    val newPhotoPathLiveData = MutableLiveData("")
+    val newProblemsLiveData = MutableLiveData<MutableList<String>>(mutableListOf<String>())
 
-    val newProductDateLiveData = MutableLiveData<ProductDate>(ProductDate(PersianDate().shYear,PersianDate().shMonth,PersianDate().shDay))
-    val photoPathLiveData = MutableLiveData<String>("")
 
     fun addProducts(product: Product) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -29,11 +38,11 @@ class MainActivityViewModel(private val productsRepository: ProductsRepository) 
     }
 
     fun getProducts() {
-        viewModelScope.launch(Dispatchers.IO) {
-            productsRepository.getAll().collectLatest { products ->
-                _productsLiveData.postValue(products)
-            }
-        }
+//        viewModelScope.launch(Dispatchers.IO) {
+//            productsRepository.getAll().collectLatest { products ->
+//                _productsLiveData.postValue(products)
+//            }
+//        }
     }
 
 }
