@@ -1,11 +1,10 @@
-package com.example.repaitshopapplication.ui.product
+package com.example.repaitshopapplication.ui.products
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.repaitshopapplication.data.Product
-import com.example.repaitshopapplication.data.ProductDate
 import com.example.repaitshopapplication.repository.ProductsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
@@ -26,5 +25,4 @@ class ProductsViewModel(
             }
         }
     }
-
 }
