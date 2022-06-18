@@ -34,6 +34,15 @@ class ProductsFragment : Fragment(), ProductsAdapter.OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupAdapter()
+        initProductsCount()
+    }
+
+    private fun initProductsCount() {
+        val textView = binding.productsCountTv
+
+        viewModel.productsLiveData.observe(viewLifecycleOwner){
+            textView.text = it.size.toString()
+        }
     }
 
     private fun setupAdapter() {

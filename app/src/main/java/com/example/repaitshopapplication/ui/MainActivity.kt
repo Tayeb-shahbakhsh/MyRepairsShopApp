@@ -64,7 +64,6 @@ class MainActivity : AppCompatActivity(), KoinComponent {
         val view = DialogCreateProductBinding.inflate(layoutInflater)
         val dialog = AlertDialog.Builder(this)
             .setView(view.root)
-            .setCancelable(false)
             .show()
 
         view.problemAc.setAdapter(ArrayAdapter(this, R.layout.problem_item_list, Issues.ISSUES))
@@ -176,10 +175,9 @@ class MainActivity : AppCompatActivity(), KoinComponent {
     }
 
     private fun getTime(): ProductTime {
-        val persianDate = PersianDate()
         return ProductTime(
-            persianDate.hour.toString(), persianDate.minute.toString()
+            PersianDate().hour.toString(),
+            PersianDate().minute.toString()
         )
     }
-
 }

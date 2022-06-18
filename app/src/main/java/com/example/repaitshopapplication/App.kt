@@ -7,6 +7,8 @@ import com.example.repaitshopapplication.repository.ProductsRepositoryImpl
 import com.example.repaitshopapplication.ui.MainActivityViewModel
 import com.example.repaitshopapplication.ui.product.ProductViewModel
 import com.example.repaitshopapplication.ui.products.ProductsViewModel
+import com.example.repaitshopapplication.ui.search.SearchFragment
+import com.example.repaitshopapplication.ui.search.SearchViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.component.KoinComponent
@@ -23,6 +25,7 @@ class App : Application(), KoinComponent {
             viewModel { ProductsViewModel(get()) }
             viewModel { MainActivityViewModel(get()) }
             viewModel { ProductViewModel(get()) }
+            viewModel { SearchViewModel(get()) }
             factory<ProductsRepository> { ProductsRepositoryImpl(database.productDao) }
         }
 

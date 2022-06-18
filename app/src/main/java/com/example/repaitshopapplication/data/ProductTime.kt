@@ -11,7 +11,7 @@ data class ProductTime(
 
     fun getTime(): String{
         var hour = hour
-        var minute = hour
+        var minute = minutes
         if (hour.length == 1){
             hour = "0$hour"
         }
