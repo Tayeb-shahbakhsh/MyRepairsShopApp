@@ -6,5 +6,6 @@
     <color name="warning">#BCF3C524</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="background">#EDE9F3</color>
     <color name="transparent">#0000FFFF</color>
 </resources>

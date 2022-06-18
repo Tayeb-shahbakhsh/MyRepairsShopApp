@@ -12,7 +12,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
-
         android:layout_height="match_parent">
 
         <ScrollView
@@ -88,7 +87,7 @@
                     style="@style/big_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1400/1/1"
+                    android:text="@{product.date.date}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/nameTv" />
 
@@ -97,7 +96,7 @@
                     style="@style/big_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="11:12"
+                    android:text="@{product.time.time}"
                     app:layout_constraintBottom_toBottomOf="@+id/dateTv"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/dateTv" />
