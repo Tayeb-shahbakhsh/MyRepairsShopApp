@@ -53,7 +53,7 @@ class ProductsFragment : Fragment(), ProductsAdapter.OnItemClickListener {
         }
     }
 
-    override fun onItemClick(position: Int) {
+    override fun onItemClick(position: Int, id: Int) {
         navigationToProductDetail(position)
     }
 

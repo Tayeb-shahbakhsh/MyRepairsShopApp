@@ -23,14 +23,14 @@ class ProductsAdapter(private var data: List<Product>, val listener: OnItemClick
             if (v != null) {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    listener.onItemClick(adapterPosition)
+                    listener.onItemClick(adapterPosition,data[position].id)
                 }
             }
         }
     }
 
     interface OnItemClickListener {
-        fun onItemClick(position: Int)
+        fun onItemClick(position: Int,id: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =

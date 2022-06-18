@@ -14,7 +14,6 @@ class SearchViewModel(private val repository: ProductsRepository) : ViewModel() 
 
     private val _filteredProductsLiveDate = MutableLiveData<List<Product>?>()
     private val _productsLiveData = MutableLiveData<List<Product>>()
-
     val filteredProductsLiveDate: MutableLiveData<List<Product>?>
         get() = _filteredProductsLiveDate
     val productLiveData: LiveData<List<Product>>
@@ -28,8 +27,19 @@ class SearchViewModel(private val repository: ProductsRepository) : ViewModel() 
         }
     }
 
-    fun findProductFromDataBase(text: String) {
+    fun getProduct(id : Int) : Product{
+        var product :Product = Product()
 
+        productLiveData.value?.forEach {
+            if (it.id == id){
+                product = it
+            }
+        }
+
+        return product
+    }
+
+    fun findProductFromDataBase(text: String) {
         viewModelScope.launch(Dispatchers.IO) {
 
             var newList = productLiveData.value?.filter { product ->

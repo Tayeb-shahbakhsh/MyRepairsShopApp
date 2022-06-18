@@ -60,9 +60,10 @@ class SearchFragment : Fragment(), ProductsAdapter.OnItemClickListener {
         })
     }
 
-    override fun onItemClick(position: Int) {
+    override fun onItemClick(position: Int, id: Int) {
+        Log.d("asdf23", "onItemClick: $id")
         binding.searchEt.setText("")
-        val product = viewModel.productLiveData.value?.get(position)
+        val product = viewModel.getProduct(id)
         val action =
             SearchFragmentDirections.actionSearchFragmentToProductFragment(position, product)
         findNavController().navigate(action)

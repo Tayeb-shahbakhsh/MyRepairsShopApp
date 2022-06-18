@@ -94,7 +94,8 @@ class MainActivity : AppCompatActivity(), KoinComponent {
         }
         view.saveBtn.setOnClickListener {
             saveProduct(view)
-            dialog.dismiss()
+            viewModel.newPhotoPathLiveData.postValue("")
+            dialog.hide()
         }
     }
 
