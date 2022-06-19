@@ -6,11 +6,11 @@ import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI.setupWithNavController
+import com.bumptech.glide.Glide
 import com.example.repaitshopapplication.R
 import com.example.repaitshopapplication.data.Product
 import com.example.repaitshopapplication.data.ProductDate
@@ -18,7 +18,6 @@ import com.example.repaitshopapplication.data.ProductTime
 import com.example.repaitshopapplication.databinding.ActivityMainBinding
 import com.example.repaitshopapplication.databinding.DialogCreateProductBinding
 import com.example.repaitshopapplication.utils.Issues
-import com.example.repaitshopapplication.utils.Status
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textview.MaterialTextView
 import com.vansuita.pickimage.bundle.PickSetup
@@ -71,11 +70,18 @@ class MainActivity : AppCompatActivity(), KoinComponent {
         view.problemCountNumberPicker.maxValue = 50
         viewModel.newPhotoPathLiveData.observe(this) {
             if (it.isNotEmpty()) {
-                view.productIv.setImageURI(it.toUri())
+                setImageToDialogIv(it, view)
             }
         }
 
         setupDialogClickListeners(view, dialog)
+    }
+
+    private fun setImageToDialogIv(imagePath: String, view: DialogCreateProductBinding) {
+        Glide
+            .with(this)
+            .load(imagePath)
+            .into(view.productIv)
     }
 
     private fun setupDialogClickListeners(view: DialogCreateProductBinding, dialog: AlertDialog) {
@@ -94,8 +100,15 @@ class MainActivity : AppCompatActivity(), KoinComponent {
         }
         view.saveBtn.setOnClickListener {
             saveProduct(view)
-            viewModel.newPhotoPathLiveData.postValue("")
+            prepareDialogForNextProduct()
             dialog.hide()
+        }
+    }
+
+    private fun prepareDialogForNextProduct() {
+        viewModel.apply {
+            newPhotoPathLiveData.value=""
+            newProblemsLiveData.value?.clear()
         }
     }
 

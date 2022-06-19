@@ -20,7 +20,7 @@ class MainActivityViewModel(
     private var _productsLiveData = MutableLiveData<List<Product>>()
     val productsLiveData: LiveData<List<Product>>
         get() = _productsLiveData
-    val newProductDateLiveData = MutableLiveData(
+    var newProductDateLiveData = MutableLiveData(
         ProductDate(
             PersianDate().shYear,
             PersianDate().shMonth,
