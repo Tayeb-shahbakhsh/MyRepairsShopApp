@@ -29,7 +29,7 @@ class ProductFragment : Fragment() {
 
     private lateinit var binding: FragmentProductBinding
     private val viewModel: ProductViewModel by viewModel()
-    private val args :ProductFragmentArgs by navArgs()
+    private val args: ProductFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +50,7 @@ class ProductFragment : Fragment() {
         args.product?.apply {
             binding.productIv.setImageURI(imagePath.toUri())
 
-            binding.removeBtn.setOnClickListener {
+            binding.removeBtn.setOnLongClickListener {
                 viewModel.removeProduct(args.product!!)
                 findNavController().popBackStack()
             }
