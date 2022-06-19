@@ -50,7 +50,7 @@ class ProductFragment : Fragment() {
         args.product?.apply {
             binding.productIv.setImageURI(imagePath.toUri())
 
-            binding.removeBtn.setOnClickListener {
+            binding.removeBtn.setOnLongClickListener {
                 viewModel.removeProduct(args.product!!)
                 findNavController().popBackStack()
             }
